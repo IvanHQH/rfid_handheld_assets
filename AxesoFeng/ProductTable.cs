@@ -24,7 +24,6 @@ namespace AxesoFeng
             column.AutoIncrement = false;
             column.ReadOnly = false;
             column.Unique = false;
-            // Add the column to the table.
             table.Columns.Add(column);
 
             // Create second column.
@@ -35,71 +34,15 @@ namespace AxesoFeng
             
             column.ReadOnly = false;
             column.Unique = false;
-            //column.MaxLength=
-            // Add the column to the table.
             table.Columns.Add(column);
-
-            /// Oficialia
-            //// Create new DataColumn, set DataType, 
-            //// ColumnName and add to DataTable.    
-            //column = new DataColumn();
-            //column.DataType = System.Type.GetType("System.Int32");
-            //column.ColumnName = "TOTAL";
-            //column.ReadOnly = true;
-            //column.Unique = false;
-            //// Add the Column to the DataColumnCollection.
-            //table.Columns.Add(column);
-
-            column = new DataColumn();
-            column.DataType = System.Type.GetType("System.String");
-            column.ColumnName = "NOM LUGAR";
-            column.ReadOnly = true;
-            column.Unique = false;
-            table.Columns.Add(column);
-
-            column = new DataColumn();
-            column.DataType = System.Type.GetType("System.Int32");
-            column.ColumnName = "ID LUGAR";
-            column.ReadOnly = true;
-            column.Unique = false;
-            table.Columns.Add(column);
-
-            ///////////////////////////
-
-
-            // Make the ID column the primary key column.
-            /*DataColumn[] PrimaryKeyColumns = new DataColumn[1];
-            PrimaryKeyColumns[0] = table.Columns["id"];
-            table.PrimaryKey = PrimaryKeyColumns;*/
-
-            // Instantiate the DataSet variable.
-            /*dataSet = new DataSet();
-            // Add the new DataTable to the DataSet.
-            dataSet.Tables.Add(table);*/
-
-            // Create three new DataRow objects and add 
-            // them to the DataTable
         }
 
-        /// Oficialia
-        //public void addRow(String upc,String productName,String total)
-        //{
-        //    DataRow row;
-        //    row = this.NewRow();
-        //    row["UPC"] = upc;
-        //    row["NOMBRE"] = productName;
-        //    row["TOTAL"] = total;
-        //    this.Rows.Add(row);
-        //}
-
-        public void addRow(String upc, String productName, String place_name, String place_id)
+        public void addRow(String upc, String productName)
         {
             DataRow row;
             row = this.NewRow();
             row["ID"] = upc;
             row["NOMBRE"] = productName;
-            row["NOM LUGAR"] = place_name;
-            row["ID LUGAR"] = place_id;
             this.Rows.Add(row);
         }
 
@@ -116,7 +59,7 @@ namespace AxesoFeng
             item = this.Columns[0];
         
             tbcName = new DataGridTextBoxColumn();
-            tbcName.Width = 110;
+            tbcName.Width = 120;
             tbcName.MappingName = item.ColumnName;
             tbcName.HeaderText = item.ColumnName;
             tableStyle.GridColumnStyles.Add(tbcName);
@@ -124,21 +67,6 @@ namespace AxesoFeng
             item = this.Columns[1];
             tbcName = new DataGridTextBoxColumn();
             tbcName.Width = 200;
-            tbcName.MappingName = item.ColumnName;
-            tbcName.HeaderText = item.ColumnName;
-            tableStyle.GridColumnStyles.Add(tbcName);
-
-            item = this.Columns[2];
-            tbcName = new DataGridTextBoxColumn();
-            tbcName.Width = 100;
-            tbcName.MappingName = item.ColumnName;
-            tbcName.HeaderText = item.ColumnName;
-            tableStyle.GridColumnStyles.Add(tbcName);
-
-            ///Oficilia
-            item = this.Columns[3];
-            tbcName = new DataGridTextBoxColumn();
-            tbcName.Width = 100;
             tbcName.MappingName = item.ColumnName;
             tbcName.HeaderText = item.ColumnName;
             tableStyle.GridColumnStyles.Add(tbcName);

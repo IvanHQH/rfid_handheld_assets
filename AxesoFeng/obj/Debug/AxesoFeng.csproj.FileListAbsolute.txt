@@ -86,3 +86,21 @@ C:\Users\Arellano\Desktop\handheld\AxesoFeng\obj\Debug\AxesoFeng.UPCSearchForm.r
 C:\Users\Arellano\Desktop\handheld\AxesoFeng\obj\Debug\AxesoFeng.csproj.GenerateResource.Cache
 C:\Users\Arellano\Desktop\handheld\AxesoFeng\obj\Debug\AxesoFeng.exe
 C:\Users\Arellano\Desktop\handheld\AxesoFeng\obj\Debug\AxesoFeng.pdb
+C:\Users\Arellano\Desktop\Oficialia\Oficilia Mayor 1.0\AxesoFeng\bin\Debug\AxesoFeng.exe
+C:\Users\Arellano\Desktop\Oficialia\Oficilia Mayor 1.0\AxesoFeng\bin\Debug\AxesoFeng.pdb
+C:\Users\Arellano\Desktop\Oficialia\Oficilia Mayor 1.0\AxesoFeng\bin\Debug\Symbol.RFID3.Device.dll
+C:\Users\Arellano\Desktop\Oficialia\Oficilia Mayor 1.0\AxesoFeng\bin\Debug\Symbol.RFID3.Device.xml
+C:\Users\Arellano\Desktop\Oficialia\Oficilia Mayor 1.0\AxesoFeng\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Arellano\Desktop\Oficialia\Oficilia Mayor 1.0\AxesoFeng\obj\Debug\AxesoFeng.LocateForm.resources
+C:\Users\Arellano\Desktop\Oficialia\Oficilia Mayor 1.0\AxesoFeng\obj\Debug\AxesoFeng.MenuForm.resources
+C:\Users\Arellano\Desktop\Oficialia\Oficilia Mayor 1.0\AxesoFeng\obj\Debug\AxesoFeng.Forms.MessageComparison.resources
+C:\Users\Arellano\Desktop\Oficialia\Oficilia Mayor 1.0\AxesoFeng\obj\Debug\AxesoFeng.SyncForm.resources
+C:\Users\Arellano\Desktop\Oficialia\Oficilia Mayor 1.0\AxesoFeng\obj\Debug\AxesoFeng.MotoProgressBar.resources
+C:\Users\Arellano\Desktop\Oficialia\Oficilia Mayor 1.0\AxesoFeng\obj\Debug\AxesoFeng.Properties.Resources.resources
+C:\Users\Arellano\Desktop\Oficialia\Oficilia Mayor 1.0\AxesoFeng\obj\Debug\AxesoFeng.InventoryForm.resources
+C:\Users\Arellano\Desktop\Oficialia\Oficilia Mayor 1.0\AxesoFeng\obj\Debug\AxesoFeng.InventoryReportFrm.resources
+C:\Users\Arellano\Desktop\Oficialia\Oficilia Mayor 1.0\AxesoFeng\obj\Debug\AxesoFeng.SearchForm.resources
+C:\Users\Arellano\Desktop\Oficialia\Oficilia Mayor 1.0\AxesoFeng\obj\Debug\AxesoFeng.UPCSearchForm.resources
+C:\Users\Arellano\Desktop\Oficialia\Oficilia Mayor 1.0\AxesoFeng\obj\Debug\AxesoFeng.csproj.GenerateResource.Cache
+C:\Users\Arellano\Desktop\Oficialia\Oficilia Mayor 1.0\AxesoFeng\obj\Debug\AxesoFeng.exe
+C:\Users\Arellano\Desktop\Oficialia\Oficilia Mayor 1.0\AxesoFeng\obj\Debug\AxesoFeng.pdb

@@ -33,24 +33,36 @@ namespace AxesoFeng
                 if (path.StartsWith("\\rfiddata\\iupc"))
                     upcFiles.Add(path);
             }
-            string[] comp;
+            string[] comp;            
             foreach (String path1 in upcFiles)                
             {
                 comp = path1.Split(new Char[] { '_' });
-                try 
-                { reportBox.Items.Add(comp[3] + " " + 
+                try
+                {
+                    //reportBox.Items.Add(comp[(int)Sync.SyncOrdenEsM.index.warehouse_id] + " " + 
                     //Date only whit tens 
-                    Sync.FormatDateTime(comp[4]).Substring(2,comp[4].Length-2)); }
+                    if (menu.configData.version == 2)
+                    {
+                        reportBox.Items.Add(getNameWarehouse(int.Parse(comp[(int)Sync.SyncOrdenEsM.index.warehouse_id]),
+                            menu.warehouses.collection) + " " +
+                        Sync.FormatDateTime(comp[(int)Sync.SyncOrdenEsM.index.date_time]).Substring(2, comp[3].Length - 2));
+                    }
+                    else {
+                        reportBox.Items.Add(Sync.FormatDateTime(comp[(int)Sync.SyncOrdenEsM.index.date_time]).Substring(2, comp[3].Length - 2));
+                    }
+                }
                 catch (Exception exc) {
                     MessageBox.Show("Nombre del archivo sin formato correcto", "Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Asterisk, MessageBoxDefaultButton.Button1);
+                    this.Hide();
                     break;
                 }                
-                //reportBox.Items[0].va
-                //reportBox.Items.Add(DateTime.FromFileTime(
-                //    Convert.ToInt64(path1.Replace(@"\rfiddata\iupc", "").Replace(@".csv", ""))).ToString());
-                //reportBox.Items.Add(Sync.de
             }
+        }
+
+        private void NamePlace(int idPlace)
+        {
+
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
@@ -63,7 +75,8 @@ namespace AxesoFeng
             ProductTable table = new ProductTable();
     
             //String path=@"\rfiddata\iupc"+DateTime.Parse(reportBox.Items[reportBox.SelectedIndex].ToString()).ToFileTime().ToString()+".csv";
-
+            if (reportBox.SelectedIndex < 0)
+                return;
             String path = upcFiles[reportBox.SelectedIndex];
 
             using (CsvFileReader reader = new CsvFileReader(path))
@@ -72,8 +85,7 @@ namespace AxesoFeng
                 while (reader.ReadRow(rowcsv))
                 {
                     ///Oficilia
-                    //table.addRow(rowcsv[0],rowcsv[1],rowcsv[2]);
-                    table.addRow(rowcsv[0], rowcsv[1], rowcsv[2], rowcsv[3]);
+                    table.addRow(rowcsv[0], rowcsv[1]);
                 }
             }
 
@@ -89,5 +101,6 @@ namespace AxesoFeng
         {
             ProductTable.sortGrid(sender, e);
         }
+
     }
 }

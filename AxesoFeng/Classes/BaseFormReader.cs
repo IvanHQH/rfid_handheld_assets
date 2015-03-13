@@ -16,30 +16,21 @@ namespace AxesoFeng.Classes
         protected DataView dataView;
         protected MessageComparison messageForm;
         protected MenuForm menu;
-        protected String folio;
 
         public BaseFormReader()
-        {
-        }
-
-
-        public void Show(String folio)
-        {
-            this.folio = folio;
-            Show();
-        }
+        {}
 
         protected void RefreshGrid(ref DataGrid reportGrid)
         {
             Config config = Config.getConfig(@"\rfiddata\config.json");
             ProductTable table = new ProductTable();
-            Sync sync = new Sync(config.url);
+            Sync sync = new Sync(config.url,menu.idClient);
             sync.UpdatedDataBase(menu.rrfid.m_TagTable, menu.products.items);
             foreach (UpcInventory item in menu.rrfid.fillUPCsInventory(menu.products))
             {
                 ///Oficialia
                 //table.addRow(item.upc, item.name, item.total.ToString());
-                table.addRow(item.upc, item.name, item.place_name, item.place_id.ToString());
+                table.addRow(item.upc, item.name);
                 ///
             }
             dataView = new DataView(table);
@@ -52,7 +43,7 @@ namespace AxesoFeng.Classes
         {
             if (messageForm != null)
             {
-                messageForm.fillMessages(messages,valueWarehouse,this.folio);
+                messageForm.fillMessages(messages,valueWarehouse);
                 messageForm.Show();
             }
         }
@@ -69,8 +60,7 @@ namespace AxesoFeng.Classes
                     //    int.Parse(row.ItemArray[(int)IndexDataView.quantity].ToString())));
                     assets.Add(new RespFolio.Assets(row.ItemArray[(int)IndexDataView.upc].ToString(),
                         row.ItemArray[(int)IndexDataView.name].ToString(),
-                        row.ItemArray[(int)IndexDataView.place_name].ToString(),
-                        int.Parse(row.ItemArray[(int)IndexDataView.place_id].ToString())));
+                        "",1));
                     ////
                 }
             }
@@ -83,15 +73,16 @@ namespace AxesoFeng.Classes
             FolioOrder folio = new FolioOrder(menu.configData.url);
             List<string> messages = new List<string>();
             List<RespFolio.Assets> productsRead = ProductsRead();
-            messages = folio.CompareTo(productsRead, this.folio,valueWarehouse);
+            messages = folio.CompareTo(productsRead,valueWarehouse);
             if (messages.Count == 0)
             {
                 if (MessageBox.Show("¿Desea guardar la lectura?", "OK", MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
-                    messageForm.Save(valueWarehouse, this.folio);
+                    messageForm.Save(valueWarehouse);
             }
             else
                 ShowMessages(messages, valueWarehouse);
         }
+
     }
 }

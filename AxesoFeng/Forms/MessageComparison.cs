@@ -6,6 +6,8 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
+using ReadWriteCsv;
 
 namespace AxesoFeng.Forms
 {
@@ -13,8 +15,11 @@ namespace AxesoFeng.Forms
     {
         private MenuForm menu;
         //private String nameFile;
-        private String folio;
         private String valueWarehouse;
+        private bool _save;
+        public bool varSave {
+            get { return _save; }
+        }
 
         public MessageComparison(MenuForm form)
         {            
@@ -23,11 +28,16 @@ namespace AxesoFeng.Forms
             setColors(menu.configData);
         }
 
-        public void fillMessages(List<String> messages,String valueWarehouse, String folio)
+        public void fillMessages(List<String> messages,String valueWarehouse)
         {
-            //this.nameFile = nameFile;
             this.valueWarehouse = valueWarehouse;
-            this.folio = folio;
+            messagesListview.Items.Clear();
+            foreach (String message in messages)
+                messagesListview.Items.Add(new ListViewItem(message));
+        }
+
+        public void fillMessages(List<String> messages)
+        {
             messagesListview.Items.Clear();
             foreach (String message in messages)
                 messagesListview.Items.Add(new ListViewItem(message));
@@ -35,7 +45,6 @@ namespace AxesoFeng.Forms
 
         private void ExitButton_Click(object sender, EventArgs e)
         {
-            menu.showCaptureFolio = false;
             this.Hide();
         }
 
@@ -58,43 +67,70 @@ namespace AxesoFeng.Forms
 
         private void SaveButton_Click(object sender, EventArgs e)
         { 
-            Save(valueWarehouse,folio);
+            Save(valueWarehouse);
         }
 
-        public void Save(String valueWarehouse,String folio)
+        public void Save(String valueWarehouse)
         {
             this.valueWarehouse = valueWarehouse;
-            this.folio = folio;
-
             menu.rrfid.stop();
             labelLog.Text = "Guardando";
             String folder = "\\rfiddata";
             String path;
             DateTime timestamp = DateTime.Now;
-            path = NameFile(TypeFile.epc, valueWarehouse,timestamp);
+            path = NameFile(TypeFile.epc, valueWarehouse,timestamp,false);
             menu.products.saveEPCs(menu.rrfid, folder, path);
-            path = NameFile(TypeFile.upc, valueWarehouse,timestamp);
+            path = NameFile(TypeFile.upc, valueWarehouse,timestamp,false);
             menu.products.saveUPCs(menu.rrfid, folder, path);
+            path = NameFile(TypeFile.upc, valueWarehouse, timestamp, true);
+            SaveMessage(folder, path);
             menu.rrfid.clear();
             labelLog.Text = "";
             MessageBox.Show("Orden guardada");
-            menu.showCaptureFolio = false;
+            _save = true;
             this.Hide();
         }
 
-        protected String NameFile(TypeFile type, String valueWarehouse,DateTime timestamp)
+        private void SaveMessage(string folder, string path)
         {
-            
-            String dataName = menu.idCustomer.ToString();
+            Directory.CreateDirectory(folder);
+
+            using (CsvFileWriter writer = new CsvFileWriter(path))
+            {
+                if (messagesListview.Items.Count != 0)
+                {
+                    foreach (ListViewItem item in messagesListview.Items)
+                    {
+                        writer.WriteLine(item.Text + ",");
+                    }
+                }
+                else 
+                    writer.WriteLine("Comparasión exitosa");
+            }
+        }
+
+        protected String NameFile(TypeFile type, String valueWarehouse,DateTime timestamp,Boolean message)
+        {
+            String dataName = menu.configData.id_client.ToString();//client id
             dataName += "_" + valueWarehouse;//(WarehouseBox.SelectedItem as ComboboxItem).Value.ToString();
-            dataName += "_" + folio;
             dataName += "_" + FormatDateTime(timestamp);
             String path;
-            if (TypeFile.epc == type)
-                path = "\\rfiddata\\iepcs_" + dataName + ".csv";
+            if (message)
+                path = "\\rfiddata\\message_" + dataName + ".csv";
             else
-                path = "\\rfiddata\\iupcs_" + dataName + ".csv";
+            {
+                if (TypeFile.epc == type)
+                    path = "\\rfiddata\\iepcs_" + dataName + ".csv";
+                else
+                    path = "\\rfiddata\\iupcs_" + dataName + ".csv";
+            }
             return path;
         }
+
+        private void MessageComparison_GotFocus(object sender, EventArgs e)
+        {
+            _save = false;
+        }
+
     }
 }

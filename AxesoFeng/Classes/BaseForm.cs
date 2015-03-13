@@ -50,5 +50,13 @@ namespace AxesoFeng
             return result;
         }
 
+        public string getNameWarehouse(int idPlace, List<Warehouse> warehouses)
+        {
+            foreach (Warehouse warehouse in warehouses)
+                if (warehouse.id == idPlace)
+                    return warehouse.name;
+            return "";
+        }
+
     }
 }

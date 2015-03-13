@@ -44,6 +44,7 @@ namespace AxesoFeng
         internal static extern bool MessageBeep([In] UInt32 beepType);
 
         public SimpleRFID() {
+
             m_ReaderAPI = new RFIDReader("localhost", 5084, 0);
             m_ReaderAPI.Connect();
             
@@ -223,7 +224,7 @@ namespace AxesoFeng
             {
                 ///UpcObject = new UpcInventory(prod.upc, prod.place_name);
                 ///Oficialia
-                UpcObject = new UpcInventory(prod.upc, prod.name,prod.place_name,prod.place_id);
+                UpcObject = new UpcInventory(prod.upc, prod.name,prod.place_id);
                 ///
                 UpcIndex.Add(prod.upc, UpcList.Count);
                 UpcList.Add(UpcObject);

@@ -18,7 +18,6 @@ namespace AxesoFeng
         {
             items= new List<Asset>();
             UPCindex = new Dictionary<string, int>();
-
             using (CsvFileReader reader = new CsvFileReader(path))
             {
                 CsvRow row = new CsvRow();
@@ -30,10 +29,8 @@ namespace AxesoFeng
                     tempprod.id = 1;
                     tempprod.upc = row[0];
                     tempprod.name = row[1];
-                    ///Oficilia///
-                    tempprod.place_name = row[2];
-                    tempprod.place_id = int.Parse(row[3].ToString());
-                    //////////////
+                    tempprod.place_id = int.Parse(row[2].ToString());
+                    //tempprod.name = row[2].ToString();
                     items.Add(tempprod);
                 }
             }
@@ -79,11 +76,7 @@ namespace AxesoFeng
                     CsvRow row = new CsvRow();
                     row.Add(item.upc);
                     row.Add(item.name);
-                    ///Oficilia///
-                    row.Add(item.place_name);
                     row.Add(item.place_id.ToString());                    
-                    //////////////
-                   // row.Add(item.total.ToString());
                     writer.WriteRow(row);
                 }
             }

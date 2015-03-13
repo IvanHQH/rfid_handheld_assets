@@ -28,7 +28,7 @@ namespace AxesoFeng
             foreach (Asset prod in menu.products.getAll())
             {
                 item = new ComboboxItem();
-                item.Text = prod.place_name;
+                item.Text = prod.name;
                 item.Value = prod.upc;
                 productBox.Items.Add(item);
             }

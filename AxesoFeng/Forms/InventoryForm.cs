@@ -24,15 +24,15 @@ namespace AxesoFeng
     public partial class InventoryForm : BaseFormReader
     {
         public delegate void tdelegate();
-        //private MenuForm menu;
-        //private String folio;        
-                
+        private Image image;
 
         public InventoryForm(MenuForm form)
         {
             InitializeComponent();
             menu = form;
             setColors(menu.configData);
+            if (menu.configData.version == 3)
+                WarehouseBox.Visible = false;
         }
 
         private void startReading_Click(object sender, EventArgs e)
@@ -40,22 +40,27 @@ namespace AxesoFeng
             if(menu.rrfid.isReading)
             {
                 menu.rrfid.stop();
-                startReading.Text="Leer";
+                //startReading.Text="Leer";
+                image = new Bitmap(Path.Combine(menu.myResDir, "trigger.bmp"));
+                pbRead.Image = image;
                 RefreshGrid(ref reportGrid);
             }
             else
             {                
                 menu.rrfid.start();
-                startReading.Text = "Leyendo";                
+                //startReading.Text = "Leyendo";                
+                image = new Bitmap(Path.Combine(menu.myResDir, "read.bmp"));
+                pbRead.Image = image;
             }
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
         {
-            menu.showCaptureFolio = false;
             this.Hide();
             menu.rrfid.clear();
-            startReading.Text = "Leer";
+            //startReading.Text = "Leer";
+            image = new Bitmap(Path.Combine(menu.myResDir, "trigger.bmp"));
+            pbRead.Image = image;
             labelLog.Text = "";
             reportGrid.DataSource = null;
             menu.rrfid.ReadHandler = delegate(String tag) { };            
@@ -69,7 +74,9 @@ namespace AxesoFeng
         private void ClearButton_Click(object sender, EventArgs e)
         {
             menu.rrfid.clear();
-            startReading.Text = "Leer";
+            //startReading.Text = "Leer";
+            image = new Bitmap(Path.Combine(menu.myResDir, "trigger.bmp"));
+            pbRead.Image = image;
             labelLog.Text = "";
             reportGrid.DataSource = null;
         }
@@ -78,6 +85,8 @@ namespace AxesoFeng
         {
             if (messageForm == null)
                 messageForm = new MessageComparison(menu);
+            if (messageForm.varSave == true)
+                this.Hide();
             menu.rrfid.ReadHandler = delegate(String tag)
             {
                 labelLog.Invoke(new tdelegate(delegate()
@@ -119,13 +128,17 @@ namespace AxesoFeng
 
         private void Comparar_Click(object sender, EventArgs e)
         {
-            if (WarehouseBox.SelectedItem == null)
+            if (menu.configData.version != 3)
             {
-                MessageBox.Show("Seleccione un almacén", "Orden de Salida");
-                return;
+                if (WarehouseBox.SelectedItem == null)
+                {
+                    MessageBox.Show("Seleccione un almacén", "Orden de Salida");
+                    return;
+                }else
+                    CompareTo((WarehouseBox.SelectedItem as ComboboxItem).Value.ToString());
             }
             else
-                CompareTo((WarehouseBox.SelectedItem as ComboboxItem).Value.ToString());
+                CompareTo(menu.configData.id_warehouse.ToString());
         }
 
     }
