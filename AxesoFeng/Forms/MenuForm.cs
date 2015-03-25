@@ -27,6 +27,8 @@ namespace AxesoFeng
         public LocateForm locate;
         private InventoryForm frmInventory;
         public SyncForm frmsync;
+        private EditTextForm frmEditText;
+        private ListAssetsForm frmListAsset;
 
         //RFID Reader
         public SimpleRFID rrfid;
@@ -51,7 +53,7 @@ namespace AxesoFeng
             //Set Synchronization
             sync = new Sync(configData.url,idClient);
             sync.GET_Test();
-            //sync.GET();
+            sync.GET();
             //Set Reader
             rrfid = new SimpleRFID();
             //Set Catalogs
@@ -65,6 +67,8 @@ namespace AxesoFeng
             upcsearch = new UPCSearchForm(this);
             locate = new LocateForm(this);
             frmsync = new SyncForm(this);
+            frmListAsset = new ListAssetsForm(this);
+            frmEditText = new EditTextForm(this, @"\rfiddata\config.json");
             this.setColors(configData);
             /*
             Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(@"\rfiddata\img\logo.bmp");
@@ -86,8 +90,11 @@ namespace AxesoFeng
             SearchPicture.Image = image;
             image = new Bitmap(Path.Combine(myResDir, "menu4.bmp"));
             SyncPicture.Image = image;
-            image = new Bitmap(Path.Combine(myResDir, "menu5_export.bmp"));
-            ExitPicture.Image = image;
+            image = new Bitmap(Path.Combine(myResDir, "InventTotal.png"));
+            InventoryPicture.Image = image;
+            //InventTotal
+            //image = new Bitmap(Path.Combine(myResDir, "menu5_export.bmp"));
+            //ExitPicture.Image = image;
         }
 
         private void ExitPicture_Click(object sender, EventArgs e)
@@ -125,7 +132,26 @@ namespace AxesoFeng
         {
             if (MessageBox.Show("¿Está seguro de eliminar todas las lecturas?", "Confirmación", MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
-                FolioOrder.DeleteFiles();
+                Inventory.DeleteFiles();
+        }
+
+        private void pbEdit_Click(object sender, EventArgs e)
+        {
+            frmEditText.Show();
+        }
+
+        private void MenuForm_GotFocus(object sender, EventArgs e)
+        {
+            try {
+                if (frmEditText.Restart)
+                    Application.Exit();
+            }
+            catch (Exception exc) { }
+        }
+
+        private void InventoryPicture_Click(object sender, EventArgs e)
+        {
+            frmListAsset.Show();
         }
 
     }

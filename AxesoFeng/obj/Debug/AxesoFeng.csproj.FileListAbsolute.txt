@@ -104,3 +104,5 @@ C:\Users\Arellano\Desktop\Oficialia\Oficilia Mayor 1.0\AxesoFeng\obj\Debug\Axeso
 C:\Users\Arellano\Desktop\Oficialia\Oficilia Mayor 1.0\AxesoFeng\obj\Debug\AxesoFeng.csproj.GenerateResource.Cache
 C:\Users\Arellano\Desktop\Oficialia\Oficilia Mayor 1.0\AxesoFeng\obj\Debug\AxesoFeng.exe
 C:\Users\Arellano\Desktop\Oficialia\Oficilia Mayor 1.0\AxesoFeng\obj\Debug\AxesoFeng.pdb
+C:\Users\Arellano\Desktop\Oficialia\Oficilia Mayor 1.0\AxesoFeng\obj\Debug\AxesoFeng.EditTextForm.resources
+C:\Users\Arellano\Desktop\Oficialia\Oficilia Mayor 1.0\AxesoFeng\obj\Debug\AxesoFeng.ListAssetsForm.resources

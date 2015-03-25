@@ -9,6 +9,7 @@ namespace AxesoFeng
 {
     public partial class ProductTable : DataTable
     {
+        private bool Inventory;
         public ProductTable()
         {
             // Create a new DataTable.
@@ -35,6 +36,21 @@ namespace AxesoFeng
             column.ReadOnly = false;
             column.Unique = false;
             table.Columns.Add(column);
+
+            // Create third column.
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "ZONA";
+            column.AutoIncrement = false;
+
+            column.ReadOnly = false;
+            column.Unique = false;
+            table.Columns.Add(column);
+        }
+
+        public void SetInventory()
+        {
+            Inventory = true;
         }
 
         public void addRow(String upc, String productName)
@@ -46,6 +62,15 @@ namespace AxesoFeng
             this.Rows.Add(row);
         }
 
+        public void addRow(String upc, String productName,String placeName)
+        {
+            DataRow row;
+            row = this.NewRow();
+            row["ID"] = upc;
+            row["NOMBRE"] = productName;
+            row["ZONA"] = placeName;
+            this.Rows.Add(row);
+        }
 
         /// 
 
@@ -55,9 +80,9 @@ namespace AxesoFeng
             tableStyle.MappingName = this.TableName;
 
             DataColumn item;
+
             DataGridTextBoxColumn tbcName;
-            item = this.Columns[0];
-        
+            item = this.Columns[0];        
             tbcName = new DataGridTextBoxColumn();
             tbcName.Width = 120;
             tbcName.MappingName = item.ColumnName;
@@ -70,6 +95,15 @@ namespace AxesoFeng
             tbcName.MappingName = item.ColumnName;
             tbcName.HeaderText = item.ColumnName;
             tableStyle.GridColumnStyles.Add(tbcName);
+            if (Inventory)
+            {
+                item = this.Columns[2];
+                tbcName = new DataGridTextBoxColumn();
+                tbcName.Width = 200;
+                tbcName.MappingName = item.ColumnName;
+                tbcName.HeaderText = item.ColumnName;
+                tableStyle.GridColumnStyles.Add(tbcName);
+            }
             ///
             return tableStyle;
         }

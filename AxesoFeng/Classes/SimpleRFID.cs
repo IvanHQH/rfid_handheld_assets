@@ -45,23 +45,31 @@ namespace AxesoFeng
 
         public SimpleRFID() {
 
-            m_ReaderAPI = new RFIDReader("localhost", 5084, 0);
-            m_ReaderAPI.Connect();
-            
-            m_TagTable = new Hashtable(1023);
-            
-            m_ReaderAPI.Events.NotifyInventoryStartEvent = true;
-            m_ReaderAPI.Events.NotifyInventoryStopEvent = true;
-            m_ReaderAPI.Events.NotifyAccessStartEvent = true;
-            m_ReaderAPI.Events.NotifyAccessStopEvent = true;
-            m_ReaderAPI.Events.NotifyAntennaEvent = true;
-            m_ReaderAPI.Events.NotifyBufferFullEvent = true;
-            m_ReaderAPI.Events.NotifyBufferFullWarningEvent = true;
-            m_ReaderAPI.Events.NotifyReaderExceptionEvent = true;
-            m_ReaderAPI.Events.NotifyReaderDisconnectEvent = true;
-            m_ReaderAPI.Events.NotifyHandheldTriggerEvent = true;
-            m_ReaderAPI.Events.StatusNotify += new Events.StatusNotifyHandler(Events_StatusNotify);
-            m_ReaderAPI.Events.ReadNotify += new Events.ReadNotifyHandler(Events_ReadNotify);
+            try {
+                m_ReaderAPI = new RFIDReader("localhost", 5084, 0);
+                m_ReaderAPI.Connect();
+
+                m_TagTable = new Hashtable(1023);
+
+                m_ReaderAPI.Events.NotifyInventoryStartEvent = true;
+                m_ReaderAPI.Events.NotifyInventoryStopEvent = true;
+                m_ReaderAPI.Events.NotifyAccessStartEvent = true;
+                m_ReaderAPI.Events.NotifyAccessStopEvent = true;
+                m_ReaderAPI.Events.NotifyAntennaEvent = true;
+                m_ReaderAPI.Events.NotifyBufferFullEvent = true;
+                m_ReaderAPI.Events.NotifyBufferFullWarningEvent = true;
+                m_ReaderAPI.Events.NotifyReaderExceptionEvent = true;
+                m_ReaderAPI.Events.NotifyReaderDisconnectEvent = true;
+                m_ReaderAPI.Events.NotifyHandheldTriggerEvent = true;
+                m_ReaderAPI.Events.StatusNotify += new Events.StatusNotifyHandler(Events_StatusNotify);
+                m_ReaderAPI.Events.ReadNotify += new Events.ReadNotifyHandler(Events_ReadNotify);
+            }
+            catch (Exception exc) {
+                MessageBox.Show("Error conexión localhost","Error",
+                    MessageBoxButtons.OK,MessageBoxIcon.Hand,MessageBoxDefaultButton.Button1);
+                Application.Exit(); 
+            }
+
         }
 
         /// <summary>

@@ -18,7 +18,7 @@ namespace AxesoFeng
 
         private RestClient client;
 
-        private int idClient;
+        private int pclient_id;
 
         private class GetObject {
             public List<SyncProduct> products { get; set; }
@@ -27,6 +27,8 @@ namespace AxesoFeng
 
         public class SyncProduct {
             public int id { get; set; }
+            public int pclient_id { get; set; }
+            public int warehouse_id { get; set; }
             public String upc { get; set; }
             public String name { get; set; }
             public String description { get; set; }
@@ -96,12 +98,18 @@ namespace AxesoFeng
         public Sync(String BaseUrl,int idClient)
         {
             client = new RestClient(BaseUrl);
-            this.idClient = idClient;
+            this.pclient_id = idClient;
         }
 
         public bool GET()
         {
-            var request = new RestRequest("sync", Method.GET);
+           // MessageBox.Show("1");
+            var request = new RestRequest("sync", Method.POST);
+            JsonObject json = new JsonObject();
+            request.RequestFormat = DataFormat.Json;
+            request.AddBody(json.Add("pclient_id",pclient_id.ToString()));            
+            //request.AddBody(pclient_id.ToString());
+
             IRestResponse<GetObject> response = client.Execute<GetObject>(request);
             GetObject data = response.Data;
 
@@ -109,14 +117,17 @@ namespace AxesoFeng
                 return false;
 
             Directory.CreateDirectory(@"\rfiddata");
-
-            using (CsvFileWriter writer = new CsvFileWriter(@"\rfiddata\productsrfid.csv"))
+            //MessageBox.Show("2");
+            //MessageBox.Show(data.products.Count.ToString());
+            using (CsvFileWriter writer = new CsvFileWriter(@"\rfiddata\products.csv"))
             {                
                 foreach (SyncProduct item in data.products)
                 {
                     CsvRow row = new CsvRow();
                     row.Add(item.upc);
                     row.Add(item.name);
+                    try { row.Add(item.warehouse_id.ToString()); }
+                    catch (Exception exc) { }
                     writer.WriteRow(row);
                 }
             }
@@ -253,7 +264,7 @@ namespace AxesoFeng
             try
             {
                 log = new SyncLog();
-                log.client_id = idClient;
+                log.client_id = pclient_id;
                 log.date_time = FormatDateTime(comp[(int)SyncOrdenEsM.index.date_time].Replace(".csv", ""));
                 log.user_id = 1;
                 log.description = ContentFile(path);
@@ -347,7 +358,7 @@ namespace AxesoFeng
         private JsonObject OrderMToJson(SyncOrdenEsM OrderM)
         {
             JsonObject json = new JsonObject();
-            json.Add("client_id", idClient);
+            json.Add("client_id", pclient_id);
             json.Add("created_at",OrderM.date_time);
             json.Add("updated_at",OrderM.date_time);
             json.Add("warehouse_id", OrderM.warehouse_id);
@@ -364,61 +375,61 @@ namespace AxesoFeng
             json.Add("quantity", OrderD.quantity);
             json.Add("upc", OrderD.upc);
             json.Add("orden_es_m_id", 0);
-            json.Add("client_id", idClient);
+            json.Add("client_id", pclient_id);
             return json;
         }
 
-        internal void UpdatedDataBase(Hashtable productsRead, List<Asset> productlist)
-        {
-            List<String> productsUnre = ListUPCUnrecognized(productsRead,productlist);
-            SyncProduct prodResp;
-            foreach (String product in productsUnre)
-            {
-                prodResp = GETProduct(product);
-                AddProductDataBase(prodResp);
-            }
-        }
+        //internal void UpdatedDataBase(Hashtable productsRead, List<Asset> productlist)
+        //{
+        //    List<String> productsUnre = ListUPCUnrecognized(productsRead,productlist);
+        //    SyncProduct prodResp;
+        //    foreach (String product in productsUnre)
+        //    {
+        //        prodResp = GETProduct(product);
+        //        AddProductDataBase(prodResp);
+        //    }
+        //}
 
-        private bool AddProductDataBase(SyncProduct product)
-        {
-            using (CsvFileWriter writer = new CsvFileWriter(@"\rfiddata\productsrfid.csv"))
-            {
-                CsvRow row = new CsvRow();
-                row.Add(product.upc);
-                row.Add(product.name);
-                writer.WriteRow(row);
-            }
-            var request = new RestRequest("add_product", Method.POST);
-            request.RequestFormat = DataFormat.Json;
-            request.AddBody(product);
-            IRestResponse response = client.Execute(request);
-            if (!requestError(response.StatusCode.ToString()))
-                return false;
-            if (!response.Content.Equals("yes save"))
-                return false;
-            return true;
-        }
+        //private bool AddProductDataBase(SyncProduct product)
+        //{
+        //    using (CsvFileWriter writer = new CsvFileWriter(@"\rfiddata\productsrfid.csv"))
+        //    {
+        //        CsvRow row = new CsvRow();
+        //        row.Add(product.upc);
+        //        row.Add(product.name);
+        //        writer.WriteRow(row);
+        //    }
+        //    var request = new RestRequest("add_product", Method.POST);
+        //    request.RequestFormat = DataFormat.Json;
+        //    request.AddBody(product);
+        //    IRestResponse response = client.Execute(request);
+        //    if (!requestError(response.StatusCode.ToString()))
+        //        return false;
+        //    if (!response.Content.Equals("yes save"))
+        //        return false;
+        //    return true;
+        //}
 
-        private List<String> ListUPCUnrecognized(Hashtable productsRead, List<Asset> productlist) 
-        {
-            Boolean find;
-            List<String> productsUnr = new List<String>();
-            String epc;
-            foreach (DictionaryEntry productr in productsRead)
-            {
-                find = false;
-                //product.Key, product.Value
-                foreach (Asset productl in productlist)
-                {
-                    epc = EpcTools.getUpc(productr.Key.ToString());
-                    if (productl.upc == epc)
-                    { find = true;  break;}
-                }
-                if (find == false)
-                    productsUnr.Add(productr.Key.ToString());
-            }
-            return productsUnr;
-        }
+        //private List<String> ListUPCUnrecognized(Hashtable productsRead, List<Asset> productlist) 
+        //{
+        //    Boolean find;
+        //    List<String> productsUnr = new List<String>();
+        //    String epc;
+        //    foreach (DictionaryEntry productr in productsRead)
+        //    {
+        //        find = false;
+        //        //product.Key, product.Value
+        //        foreach (Asset productl in productlist)
+        //        {
+        //            epc = EpcTools.getUpc(productr.Key.ToString());
+        //            if (productl.upc == epc)
+        //            { find = true;  break;}
+        //        }
+        //        if (find == false)
+        //            productsUnr.Add(productr.Key.ToString());
+        //    }
+        //    return productsUnr;
+        //}
 
         public SyncProduct GETProduct(String epc)
         {

@@ -51,5 +51,10 @@ namespace AxesoFeng
             menu.locate.LoadEPC(EPCBox.Text);
             //MenuForm.locate.Show();
         }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

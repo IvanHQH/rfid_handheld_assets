@@ -14,12 +14,8 @@ namespace AxesoFeng.Forms
     public partial class MessageComparison : BaseForm
     {
         private MenuForm menu;
-        //private String nameFile;
         private String valueWarehouse;
-        private bool _save;
-        public bool varSave {
-            get { return _save; }
-        }
+        public bool saveDiff;
 
         public MessageComparison(MenuForm form)
         {            
@@ -87,24 +83,21 @@ namespace AxesoFeng.Forms
             menu.rrfid.clear();
             labelLog.Text = "";
             MessageBox.Show("Orden guardada");
-            _save = true;
             this.Hide();
         }
 
         private void SaveMessage(string folder, string path)
         {
             Directory.CreateDirectory(folder);
-
             using (CsvFileWriter writer = new CsvFileWriter(path))
             {
                 if (messagesListview.Items.Count != 0)
                 {
                     foreach (ListViewItem item in messagesListview.Items)
-                    {
                         writer.WriteLine(item.Text + ",");
-                    }
+                    saveDiff = true;
                 }
-                else 
+                else
                     writer.WriteLine("Comparasión exitosa");
             }
         }
@@ -129,7 +122,7 @@ namespace AxesoFeng.Forms
 
         private void MessageComparison_GotFocus(object sender, EventArgs e)
         {
-            _save = false;
+            
         }
 
     }

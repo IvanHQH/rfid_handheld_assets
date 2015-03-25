@@ -25,14 +25,25 @@ namespace AxesoFeng
     {
         public delegate void tdelegate();
         private Image image;
-
+        private bool pushComparison;
+        
         public InventoryForm(MenuForm form)
         {
+            
             InitializeComponent();
             menu = form;
             setColors(menu.configData);
             if (menu.configData.version == 3)
                 WarehouseBox.Visible = false;
+            WarehouseBox.Items.Clear();
+            ComboboxItem item;
+            foreach (Warehouse entry in menu.warehouses.collection)
+            {
+                item = new ComboboxItem();
+                item.Text = entry.name;
+                item.Value = entry.id;
+                WarehouseBox.Items.Add(item);
+            }
         }
 
         private void startReading_Click(object sender, EventArgs e)
@@ -85,8 +96,18 @@ namespace AxesoFeng
         {
             if (messageForm == null)
                 messageForm = new MessageComparison(menu);
-            if (messageForm.varSave == true)
+            if (messageForm.saveDiff == true)
+            {
+                messageForm.saveDiff = false;
                 this.Hide();
+            }
+            if (pushComparison == false)
+            {
+                menu.rrfid.clear();
+                reportGrid.DataSource = null;
+            }
+            pushComparison = false;            
+            
             menu.rrfid.ReadHandler = delegate(String tag)
             {
                 labelLog.Invoke(new tdelegate(delegate()
@@ -107,17 +128,6 @@ namespace AxesoFeng
                     RefreshGrid(ref reportGrid);
                 }));
             };
-
-            WarehouseBox.Items.Clear();
-            ComboboxItem item;
-            foreach (Warehouse entry in menu.warehouses.collection)
-            {
-                item = new ComboboxItem();
-                item.Text = entry.name;
-                item.Value = entry.id;
-                WarehouseBox.Items.Add(item);
-            }
-
             menu.rrfid.isTriggerActive = true;
         }
 
@@ -128,6 +138,7 @@ namespace AxesoFeng
 
         private void Comparar_Click(object sender, EventArgs e)
         {
+            pushComparison = true;
             if (menu.configData.version != 3)
             {
                 if (WarehouseBox.SelectedItem == null)
@@ -139,6 +150,9 @@ namespace AxesoFeng
             }
             else
                 CompareTo(menu.configData.id_warehouse.ToString());
+            if (CompSuccesfull) {
+                this.Hide();
+            }                
         }
 
     }

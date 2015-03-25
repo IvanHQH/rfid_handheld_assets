@@ -6,7 +6,6 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.MainMenu mainMenu1;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -30,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MessageComparison));
-            this.mainMenu1 = new System.Windows.Forms.MainMenu();
             this.messagesListview = new System.Windows.Forms.ListView();
             this.labelLog = new System.Windows.Forms.Label();
             this.pbSave = new System.Windows.Forms.PictureBox();
@@ -42,7 +40,7 @@
             this.messagesListview.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular);
             this.messagesListview.Location = new System.Drawing.Point(4, 4);
             this.messagesListview.Name = "messagesListview";
-            this.messagesListview.Size = new System.Drawing.Size(224, 151);
+            this.messagesListview.Size = new System.Drawing.Size(224, 189);
             this.messagesListview.TabIndex = 6;
             this.messagesListview.View = System.Windows.Forms.View.List;
             this.messagesListview.SelectedIndexChanged += new System.EventHandler(this.messagesListview_SelectedIndexChanged);
@@ -51,14 +49,14 @@
             // labelLog
             // 
             this.labelLog.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
-            this.labelLog.Location = new System.Drawing.Point(4, 157);
+            this.labelLog.Location = new System.Drawing.Point(4, 196);
             this.labelLog.Name = "labelLog";
             this.labelLog.Size = new System.Drawing.Size(74, 24);
             // 
             // pbSave
             // 
             this.pbSave.Image = ((System.Drawing.Image)(resources.GetObject("pbSave.Image")));
-            this.pbSave.Location = new System.Drawing.Point(192, 157);
+            this.pbSave.Location = new System.Drawing.Point(194, 195);
             this.pbSave.Name = "pbSave";
             this.pbSave.Size = new System.Drawing.Size(35, 25);
             this.pbSave.Click += new System.EventHandler(this.SaveButton_Click);
@@ -66,7 +64,7 @@
             // pbBack
             // 
             this.pbBack.Image = ((System.Drawing.Image)(resources.GetObject("pbBack.Image")));
-            this.pbBack.Location = new System.Drawing.Point(151, 157);
+            this.pbBack.Location = new System.Drawing.Point(153, 195);
             this.pbBack.Name = "pbBack";
             this.pbBack.Size = new System.Drawing.Size(35, 25);
             this.pbBack.Click += new System.EventHandler(this.ExitButton_Click);
@@ -76,12 +74,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(240, 268);
+            this.ClientSize = new System.Drawing.Size(240, 294);
             this.Controls.Add(this.pbSave);
             this.Controls.Add(this.pbBack);
             this.Controls.Add(this.labelLog);
             this.Controls.Add(this.messagesListview);
-            this.Menu = this.mainMenu1;
             this.Name = "MessageComparison";
             this.Text = "Comparison Result";
             this.GotFocus += new System.EventHandler(this.MessageComparison_GotFocus);

@@ -117,9 +117,69 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="mainMenu1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>18, 3</value>
-  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pbBuscar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACMAAAAZCAIAAAA0WgDFAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vwAADr8BOAVTJAAAAWhJREFUSEvFlSG7gyAUhu9/IpFM+wE2kslkspmWSKT7B5ZMJJJtyURaWjMtkUy2
+        m7io57nO7QBuj8/uGxn48p3B4esnTt9pVYsqZxN5JWqlux5+3Ia1Nmzqr+rIKEGhrKq1gYkxgibTCp9k
+        gTLRbrH5TcNFpPCxCXpgJf+e4CU7rHaQissAy7z4TKYplm8l+em5SEaf8gQmuH0UTSQYbho0//OkQnv/
+        +l4vuSnXwVyoyagClpNMdjDooZMZTCWFCsXCTIsots+Ru/xBFWbSAlYS3kZFTtVymE6EhjEExLREYrHS
+        zXSSwYJQqH81fa56HzwR757yTN5gEAM1vXdzq3OwueMmF+vFbkRIGWlHPpPL9UKHnUl5qKn7TY5Nr8aK
+        gCxoGgm9hGNZlTyuontlUdPM+nUfyyib6w1uwO28RbbRFMO0PCbbyeR4kj2c+v1MjnsZLdT6Hu9qcsyy
+        pHzQOPY2jQxor7TW/gI34S5aKYZldgAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="pbBack.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        Qk3CCgAAAAAAADYAAAAoAAAAIwAAABkAAAABABgAAAAAAAAAAAASCwAAEgsAAAAAAAAAAAAA////////
+        ////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////AAAA+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn54PL5+eba+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
+        tOD5M1F95q5q+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5icHmMzlYMzMz5q5q+fn5
+        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn58vn5cKjaMzM/MzMzMzMz5q5q+fn5+fn5+fn5+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5+fn5+fn5+fn54Pn5UX20MzMzMzMzMzMzMzMz5q5q+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5x+z5
+        OViPMzMzMzMzMzMzMzMzMzMz5q5q+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5qNryMz9wMzMzMzMzMzMzMzMz
+        MzMzMzMz5q5q+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5+fn5fbTgMzNRMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMz
+        MzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzUTMz8s2P+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5
+        +fn5+fn5+fn57Pn5WI/HMzM5MzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMz
+        MzMzMzMzMzMzMzMzMzMzMzMz5q5q+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn55vn5P3C0
+        MzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMz
+        MzMzMzMz5q5q+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn55vn5P3C0MzMzMzMzMzMzMzMz
+        MzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMz5q5q+fn5
+        +fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn57Pn5WI/HMzM5MzMzMzMzMzMzMzMzMzMzMzMz
+        MzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMz5q5q+fn5+fn5+fn5+fn5+fn5
+        +fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5+fn5fbTgMzNRMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMz
+        MzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzUTMz8s2P+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5+fn5qNryMz9wMzMzMzMzMzMzMzMzMzMzMzMz5q5q+fn5+fn5+fn5+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5+fn5+fn5x+z5OViPMzMzMzMzMzMzMzMzMzMz5q5q+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
+        4Pn5UX20MzMzMzMzMzMzMzMz5q5q+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn58vn5cKjaMzM/
+        MzMzMzMz5q5q+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5icHmMzlYMzMz5q5q+fn5
+        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5tOD5M1F95q5q+fn5+fn5+fn5+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn54PL5+eba+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5AAAA+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5
+        +fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5AAAA
+</value>
+  </data>
   <metadata name="$this.FormFactorShadowProperty" xml:space="preserve">
     <value>Pocket_PC</value>
   </metadata>

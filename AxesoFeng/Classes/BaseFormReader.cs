@@ -16,6 +16,11 @@ namespace AxesoFeng.Classes
         protected DataView dataView;
         protected MessageComparison messageForm;
         protected MenuForm menu;
+        private bool comparisonSuccesfull;
+        protected bool CompSuccesfull
+        {
+            get { return comparisonSuccesfull; }
+        }
 
         public BaseFormReader()
         {}
@@ -25,13 +30,10 @@ namespace AxesoFeng.Classes
             Config config = Config.getConfig(@"\rfiddata\config.json");
             ProductTable table = new ProductTable();
             Sync sync = new Sync(config.url,menu.idClient);
-            sync.UpdatedDataBase(menu.rrfid.m_TagTable, menu.products.items);
+            //sync.UpdatedDataBase(menu.rrfid.m_TagTable, menu.products.items);
             foreach (UpcInventory item in menu.rrfid.fillUPCsInventory(menu.products))
             {
-                ///Oficialia
-                //table.addRow(item.upc, item.name, item.total.ToString());
                 table.addRow(item.upc, item.name);
-                ///
             }
             dataView = new DataView(table);
             reportGrid.DataSource = dataView;
@@ -48,20 +50,16 @@ namespace AxesoFeng.Classes
             }
         }
 
-        protected List<RespFolio.Assets> ProductsRead()
+        protected List<RespInventory.Assets> ProductsRead()
         {
-            List<RespFolio.Assets> assets = new List<RespFolio.Assets>();
+            List<RespInventory.Assets> assets = new List<RespInventory.Assets>();
             try
             {
                 foreach (DataRow row in dataView.Table.Rows)
                 {
-                    //Oficialia
-                    //products.Add(new RespFolio.Assets(row.ItemArray[(int)IndexDataView.name].ToString(),
-                    //    int.Parse(row.ItemArray[(int)IndexDataView.quantity].ToString())));
-                    assets.Add(new RespFolio.Assets(row.ItemArray[(int)IndexDataView.upc].ToString(),
+                    assets.Add(new RespInventory.Assets(row.ItemArray[(int)IndexDataView.upc].ToString(),
                         row.ItemArray[(int)IndexDataView.name].ToString(),
                         "",1));
-                    ////
                 }
             }
             catch (Exception exc) { }
@@ -70,15 +68,17 @@ namespace AxesoFeng.Classes
 
         protected void CompareTo(String valueWarehouse)
         {
-            FolioOrder folio = new FolioOrder(menu.configData.url);
+            Inventory folio = new Inventory(menu.configData.url);
             List<string> messages = new List<string>();
-            List<RespFolio.Assets> productsRead = ProductsRead();
+            List<RespInventory.Assets> productsRead = ProductsRead();
             messages = folio.CompareTo(productsRead,valueWarehouse);
+            comparisonSuccesfull = false;
             if (messages.Count == 0)
             {
                 if (MessageBox.Show("¿Desea guardar la lectura?", "OK", MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
                     messageForm.Save(valueWarehouse);
+                comparisonSuccesfull = true;
             }
             else
                 ShowMessages(messages, valueWarehouse);
