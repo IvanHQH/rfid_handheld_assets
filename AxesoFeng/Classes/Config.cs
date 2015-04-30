@@ -13,7 +13,6 @@ namespace AxesoFeng
         public int id_client { get; set; }
         public int id_user { get; set; }
         public string pwd { get; set; }
-        public int version { get; set; }
         public int id_warehouse { get; set; }
 
         public static Config getConfig(String path){

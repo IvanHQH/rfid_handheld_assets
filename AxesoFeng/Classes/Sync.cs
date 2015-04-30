@@ -20,6 +20,8 @@ namespace AxesoFeng
 
         private int pclient_id;
 
+        private String pathFolderName;
+
         private class GetObject {
             public List<SyncProduct> products { get; set; }
             public List<SyncWarehouse> warehouses { get; set; }
@@ -39,7 +41,7 @@ namespace AxesoFeng
             public int id { get; set; }
             public String name { get; set; }
             public String description { get; set; }
-            public int customer_id { get; set; }
+            //public int customer_id { get; set; }
         }
 
         public class SyncOrdenEsM
@@ -95,31 +97,29 @@ namespace AxesoFeng
             public int client_id;
         }
 
-        public Sync(String BaseUrl,int idClient)
+        public Sync(String BaseUrl, int idClient, String pathFolderName)
         {
             client = new RestClient(BaseUrl);
             this.pclient_id = idClient;
+            this.pathFolderName = pathFolderName;
         }
 
         public bool GET()
         {
-           // MessageBox.Show("1");
-            var request = new RestRequest("sync", Method.POST);
+            var request = new RestRequest("sync_data", Method.POST);
             JsonObject json = new JsonObject();
-            request.RequestFormat = DataFormat.Json;
-            request.AddBody(json.Add("pclient_id",pclient_id.ToString()));            
-            //request.AddBody(pclient_id.ToString());
 
+            request.RequestFormat = DataFormat.Json;
+            json.Add("pclient_id", pclient_id.ToString());
+            request.AddBody(json);
             IRestResponse<GetObject> response = client.Execute<GetObject>(request);
             GetObject data = response.Data;
 
             if (!requestError(response.StatusCode.ToString()))
                 return false;
 
-            Directory.CreateDirectory(@"\rfiddata");
-            //MessageBox.Show("2");
-            //MessageBox.Show(data.products.Count.ToString());
-            using (CsvFileWriter writer = new CsvFileWriter(@"\rfiddata\products.csv"))
+            Directory.CreateDirectory(pathFolderName);
+            using (CsvFileWriter writer = new CsvFileWriter(pathFolderName + "products.csv"))
             {                
                 foreach (SyncProduct item in data.products)
                 {
@@ -132,7 +132,7 @@ namespace AxesoFeng
                 }
             }
 
-            using (CsvFileWriter writer = new CsvFileWriter(@"\rfiddata\warehouses.csv"))
+            using (CsvFileWriter writer = new CsvFileWriter(pathFolderName + "warehouses.csv"))
             {
                 foreach (SyncWarehouse item in data.warehouses)
                 {
@@ -178,8 +178,8 @@ namespace AxesoFeng
 
         public bool POST(SyncForm sync,int idUser,string pwd,int idClient)
         {
-            Directory.CreateDirectory(@"\rfiddataold");
-            string[] filePaths = Directory.GetFiles(@"\rfiddata");
+            Directory.CreateDirectory(pathFolderName);
+            string[] filePaths = Directory.GetFiles(pathFolderName);
             List<string> upcFiles = new List<string>();
             List<string> epcFiles = new List<string>();
             List<string> messages = new List<string>();
@@ -240,7 +240,8 @@ namespace AxesoFeng
                 }
                 Application.DoEvents();
                 File.Move(path1, path1.Replace("rfiddata", "rfiddataold"));
-                File.Move(path1.Replace("epc", "upc"), path1.Replace("rfiddata", "rfiddataold").Replace("epc", "upc"));
+                File.Move(path1.Replace("epc", "upc"), 
+                    path1.Replace("rfiddata", "rfiddataold").Replace("epc", "upc"));
             }
             return true;
         }
@@ -378,58 +379,6 @@ namespace AxesoFeng
             json.Add("client_id", pclient_id);
             return json;
         }
-
-        //internal void UpdatedDataBase(Hashtable productsRead, List<Asset> productlist)
-        //{
-        //    List<String> productsUnre = ListUPCUnrecognized(productsRead,productlist);
-        //    SyncProduct prodResp;
-        //    foreach (String product in productsUnre)
-        //    {
-        //        prodResp = GETProduct(product);
-        //        AddProductDataBase(prodResp);
-        //    }
-        //}
-
-        //private bool AddProductDataBase(SyncProduct product)
-        //{
-        //    using (CsvFileWriter writer = new CsvFileWriter(@"\rfiddata\productsrfid.csv"))
-        //    {
-        //        CsvRow row = new CsvRow();
-        //        row.Add(product.upc);
-        //        row.Add(product.name);
-        //        writer.WriteRow(row);
-        //    }
-        //    var request = new RestRequest("add_product", Method.POST);
-        //    request.RequestFormat = DataFormat.Json;
-        //    request.AddBody(product);
-        //    IRestResponse response = client.Execute(request);
-        //    if (!requestError(response.StatusCode.ToString()))
-        //        return false;
-        //    if (!response.Content.Equals("yes save"))
-        //        return false;
-        //    return true;
-        //}
-
-        //private List<String> ListUPCUnrecognized(Hashtable productsRead, List<Asset> productlist) 
-        //{
-        //    Boolean find;
-        //    List<String> productsUnr = new List<String>();
-        //    String epc;
-        //    foreach (DictionaryEntry productr in productsRead)
-        //    {
-        //        find = false;
-        //        //product.Key, product.Value
-        //        foreach (Asset productl in productlist)
-        //        {
-        //            epc = EpcTools.getUpc(productr.Key.ToString());
-        //            if (productl.upc == epc)
-        //            { find = true;  break;}
-        //        }
-        //        if (find == false)
-        //            productsUnr.Add(productr.Key.ToString());
-        //    }
-        //    return productsUnr;
-        //}
 
         public SyncProduct GETProduct(String epc)
         {

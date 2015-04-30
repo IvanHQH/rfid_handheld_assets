@@ -26,11 +26,11 @@ namespace AxesoFeng
         private void Report_GotFocus(object sender, EventArgs e)
         {
             reportBox.Items.Clear();
-            string[] filePaths = Directory.GetFiles(@"\rfiddata");
+            string[] filePaths = Directory.GetFiles(menu.pathFolderName);
             upcFiles = new List<string>();
 
             foreach (String path in filePaths){
-                if (path.StartsWith("\\rfiddata\\iupc"))
+                if (path.StartsWith(menu.pathFolderName + "iupc"))
                     upcFiles.Add(path);
             }
             string[] comp;            
@@ -39,16 +39,23 @@ namespace AxesoFeng
                 comp = path1.Split(new Char[] { '_' });
                 try
                 {
-                    //reportBox.Items.Add(comp[(int)Sync.SyncOrdenEsM.index.warehouse_id] + " " + 
                     //Date only whit tens 
-                    if (menu.configData.version == 2)
+                    //public enum index
+                    //{
+                    //    client_id = 1,
+                    //    warehouse_id = 2,
+                    //    date_time = 3,
+                    //}
+                    if (menu.configInvent.version == 2)
                     {
                         reportBox.Items.Add(getNameWarehouse(int.Parse(comp[(int)Sync.SyncOrdenEsM.index.warehouse_id]),
                             menu.warehouses.collection) + " " +
-                        Sync.FormatDateTime(comp[(int)Sync.SyncOrdenEsM.index.date_time]).Substring(2, comp[3].Length - 2));
+                        Sync.FormatDateTime(comp[(int)Sync.SyncOrdenEsM.index.date_time]).Substring(2, 
+                            comp[(int)Sync.SyncOrdenEsM.index.date_time].Length - 2));
                     }
                     else {
-                        reportBox.Items.Add(Sync.FormatDateTime(comp[(int)Sync.SyncOrdenEsM.index.date_time]).Substring(2, comp[3].Length - 2));
+                        reportBox.Items.Add(Sync.FormatDateTime(comp[(int)Sync.SyncOrdenEsM.index.date_time]).Substring(2, 
+                            comp[(int)Sync.SyncOrdenEsM.index.date_time].Length - 2));
                     }
                 }
                 catch (Exception exc) {
@@ -72,8 +79,7 @@ namespace AxesoFeng
 
         private void reportBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProductTable table = new ProductTable();
-    
+            ProductTable table = new ProductTable();   
             //String path=@"\rfiddata\iupc"+DateTime.Parse(reportBox.Items[reportBox.SelectedIndex].ToString()).ToFileTime().ToString()+".csv";
             if (reportBox.SelectedIndex < 0)
                 return;
@@ -88,9 +94,7 @@ namespace AxesoFeng
                     table.addRow(rowcsv[0], rowcsv[1]);
                 }
             }
-
-            DataView view = new DataView(table);
-            
+            DataView view = new DataView(table);            
             reportGrid.DataSource = view;
             reportGrid.TableStyles.Clear();
             reportGrid.TableStyles.Add(table.getStyle());

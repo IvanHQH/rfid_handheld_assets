@@ -71,7 +71,7 @@ namespace AxesoFeng.Forms
             this.valueWarehouse = valueWarehouse;
             menu.rrfid.stop();
             labelLog.Text = "Guardando";
-            String folder = "\\rfiddata";
+            String folder = menu.pathFolderName;
             String path;
             DateTime timestamp = DateTime.Now;
             path = NameFile(TypeFile.epc, valueWarehouse,timestamp,false);
@@ -109,13 +109,13 @@ namespace AxesoFeng.Forms
             dataName += "_" + FormatDateTime(timestamp);
             String path;
             if (message)
-                path = "\\rfiddata\\message_" + dataName + ".csv";
+                path = menu.pathFolderName + "message_" + dataName + ".csv";
             else
             {
                 if (TypeFile.epc == type)
-                    path = "\\rfiddata\\iepcs_" + dataName + ".csv";
+                    path = menu.pathFolderName + "iepcs_" + dataName + ".csv";
                 else
-                    path = "\\rfiddata\\iupcs_" + dataName + ".csv";
+                    path = menu.pathFolderName + "iupcs_" + dataName + ".csv";
             }
             return path;
         }

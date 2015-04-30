@@ -29,7 +29,7 @@ namespace AxesoFeng
         {
             ProductTable table = new ProductTable();
             table.SetInventory();
-            Inventory folio = new Inventory(menu.configData.url);
+            Inventory folio = new Inventory(menu.configData.url,menu.pathFolderName);
             RespInventory respFolio = folio.GETInventoryFile();
             foreach (RespInventory.Assets asset in respFolio.assets)
             {

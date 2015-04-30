@@ -27,9 +27,9 @@ namespace AxesoFeng.Classes
 
         protected void RefreshGrid(ref DataGrid reportGrid)
         {
-            Config config = Config.getConfig(@"\rfiddata\config.json");
+            Config config = Config.getConfig(menu.pathFolderName + "config.json");
             ProductTable table = new ProductTable();
-            Sync sync = new Sync(config.url,menu.idClient);
+            Sync sync = new Sync(config.url,menu.idClient,menu.pathFolderName);
             //sync.UpdatedDataBase(menu.rrfid.m_TagTable, menu.products.items);
             foreach (UpcInventory item in menu.rrfid.fillUPCsInventory(menu.products))
             {
@@ -68,7 +68,7 @@ namespace AxesoFeng.Classes
 
         protected void CompareTo(String valueWarehouse)
         {
-            Inventory folio = new Inventory(menu.configData.url);
+            Inventory folio = new Inventory(menu.configData.url,menu.pathFolderName);
             List<string> messages = new List<string>();
             List<RespInventory.Assets> productsRead = ProductsRead();
             messages = folio.CompareTo(productsRead,valueWarehouse);

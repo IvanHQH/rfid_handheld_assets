@@ -28,12 +28,11 @@ namespace AxesoFeng
         private bool pushComparison;
         
         public InventoryForm(MenuForm form)
-        {
-            
+        {            
             InitializeComponent();
             menu = form;
             setColors(menu.configData);
-            if (menu.configData.version == 3)
+            if (menu.configInvent.version == 3)
                 WarehouseBox.Visible = false;
             WarehouseBox.Items.Clear();
             ComboboxItem item;
@@ -139,7 +138,7 @@ namespace AxesoFeng
         private void Comparar_Click(object sender, EventArgs e)
         {
             pushComparison = true;
-            if (menu.configData.version != 3)
+            if (menu.configInvent.version != 3)
             {
                 if (WarehouseBox.SelectedItem == null)
                 {

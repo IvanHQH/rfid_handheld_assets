@@ -15,10 +15,13 @@ namespace AxesoFeng
     {
         private RestClient client;
         string bu;
-        public Inventory(String BaseUrl)
+        private String pathFolderName;
+
+        public Inventory(String BaseUrl, String pathFolderName)
         {
             client = new RestClient(BaseUrl);
             bu = BaseUrl;
+            this.pathFolderName = pathFolderName;
         }
 
         public List<RespInventory.Assets> GetProductsFile(string fileName)
@@ -134,7 +137,7 @@ namespace AxesoFeng
         {
             try {
                 System.IO.StreamReader objReader;
-                objReader = File.OpenText(@"\rfiddata\inventario.json");
+                objReader = File.OpenText(pathFolderName + "inventario.json");
                 String text = objReader.ReadToEnd();
                 RespInventory data = JsonConvert.DeserializeObject<RespInventory>(text);
                 return data;
@@ -163,10 +166,10 @@ namespace AxesoFeng
             }
         }
 
-        public static void DeleteFiles()
+        public static void DeleteFiles(String pathFolderName)
         {
             Cursor.Current = Cursors.WaitCursor;
-            string[] filePaths = Directory.GetFiles(@"\rfiddata");
+            string[] filePaths = Directory.GetFiles(pathFolderName);
 
             foreach (String path in filePaths)
             {
