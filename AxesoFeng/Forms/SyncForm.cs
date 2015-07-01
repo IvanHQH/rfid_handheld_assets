@@ -20,14 +20,14 @@ namespace AxesoFeng
             setColors(menu.configData);
         }
 
-        public void updateInventory(String text)
+        public void updateReads(String text)
         {
             InventoryLabel.Text = text;
         }
 
-        public void updateOrder(String text)
-        {
-            OrderLabel.Text = text;
-        }
+        //public void updateOrder(String text)
+        //{
+        //    OrderLabel.Text = text;
+        //}
     }
 }

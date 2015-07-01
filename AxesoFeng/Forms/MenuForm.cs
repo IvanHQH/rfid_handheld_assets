@@ -105,8 +105,11 @@ namespace AxesoFeng
             SearchPicture.Image = image;
             image = new Bitmap(Path.Combine(myResDir, "menu4.bmp"));
             SyncPicture.Image = image;
-            image = new Bitmap(Path.Combine(myResDir, "InventTotal.png"));
-            InventoryPicture.Image = image;
+            if (configInvent.version == 2)
+            {
+                image = new Bitmap(Path.Combine(myResDir, "InventTotal.png"));
+                InventoryPicture.Image = image;
+            }
         }
 
         private string getNameFolderVersion(int version)
@@ -147,7 +150,7 @@ namespace AxesoFeng
             products = new AssetsList(pathFolderName + "products.csv");
             //products_bar = new ProductsList(@"\rfiddata\products_bar.csv");
             warehouses = new Warehouses(pathFolderName + "warehouses.csv");
-            if (sync.POST(frmsync,configData.id_user,configData.pwd,configData.id_client))
+            if (sync.POSTTrans(frmsync,configData.id_user,configData.pwd,configData.id_client))
                 MessageBox.Show("Sincronización exitosa", "Sincronización");
             frmsync.Hide();
         }

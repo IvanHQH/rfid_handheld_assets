@@ -27,8 +27,7 @@ namespace AxesoFeng
 
         private void ListAssetsForm_GotFocus(object sender, EventArgs e)
         {
-            ProductTable table = new ProductTable();
-            table.SetInventory();
+            ProductTable table = new ProductTable(false,true);
             Inventory folio = new Inventory(menu.configData.url,menu.pathFolderName);
             RespInventory respFolio = folio.GETInventoryFile();
             foreach (RespInventory.Assets asset in respFolio.assets)

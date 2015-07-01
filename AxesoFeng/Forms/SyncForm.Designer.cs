@@ -30,7 +30,6 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.InventoryLabel = new System.Windows.Forms.Label();
-            this.OrderLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -47,15 +46,7 @@
             this.InventoryLabel.Location = new System.Drawing.Point(12, 41);
             this.InventoryLabel.Name = "InventoryLabel";
             this.InventoryLabel.Size = new System.Drawing.Size(206, 29);
-            this.InventoryLabel.Text = "0 Inventarios";
-            // 
-            // OrderLabel
-            // 
-            this.OrderLabel.Font = new System.Drawing.Font("Tahoma", 14F, System.Drawing.FontStyle.Bold);
-            this.OrderLabel.Location = new System.Drawing.Point(12, 70);
-            this.OrderLabel.Name = "OrderLabel";
-            this.OrderLabel.Size = new System.Drawing.Size(206, 29);
-            this.OrderLabel.Text = "0 Salidas";
+            this.InventoryLabel.Text = "0 Lecturas";
             // 
             // SyncForm
             // 
@@ -63,7 +54,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(240, 294);
-            this.Controls.Add(this.OrderLabel);
             this.Controls.Add(this.InventoryLabel);
             this.Controls.Add(this.label1);
             this.Name = "SyncForm";
@@ -76,6 +66,5 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label InventoryLabel;
-        private System.Windows.Forms.Label OrderLabel;
     }
 }

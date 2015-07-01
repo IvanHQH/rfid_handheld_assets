@@ -28,12 +28,20 @@ namespace AxesoFeng.Classes
         protected void RefreshGrid(ref DataGrid reportGrid)
         {
             Config config = Config.getConfig(menu.pathFolderName + "config.json");
-            ProductTable table = new ProductTable();
+            ProductTable table = new ProductTable(false,false);
+            if(menu.configInvent.version == 2)
+                table = new ProductTable(false,true);
+            else if (menu.configInvent.version == 3)
+                table = new ProductTable(true, false);
             Sync sync = new Sync(config.url,menu.idClient,menu.pathFolderName);
             //sync.UpdatedDataBase(menu.rrfid.m_TagTable, menu.products.items);
             foreach (UpcInventory item in menu.rrfid.fillUPCsInventory(menu.products))
             {
-                table.addRow(item.upc, item.name);
+                if (menu.configInvent.version == 2)
+                    table.addRow(item.upc, item.name, getNameWarehouse(item.place_id,menu.warehouses.collection));
+                else if (menu.configInvent.version == 3)
+                    table.addRow(item.upc, item.name, item.total);
+                
             }
             dataView = new DataView(table);
             reportGrid.DataSource = dataView;

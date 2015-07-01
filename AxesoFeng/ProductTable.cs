@@ -9,8 +9,10 @@ namespace AxesoFeng
 {
     public partial class ProductTable : DataTable
     {
-        private bool Inventory;
-        public ProductTable()
+        private bool cant;
+        private bool warehouse; 
+
+        public ProductTable(bool cant, bool warehouse)
         {
             // Create a new DataTable.
             //System.Data.DataTable table = new DataTable("ParentTable");
@@ -40,25 +42,34 @@ namespace AxesoFeng
             // Create third column.
             column = new DataColumn();
             column.DataType = System.Type.GetType("System.String");
+            column.ColumnName = "TOTAL";
+            column.AutoIncrement = false;
+
+            column.ReadOnly = false;
+            column.Unique = false;
+            table.Columns.Add(column);
+
+            // Create third column.
+            column = new DataColumn();
+            column.DataType = System.Type.GetType("System.String");
             column.ColumnName = "ZONA";
             column.AutoIncrement = false;
 
             column.ReadOnly = false;
             column.Unique = false;
             table.Columns.Add(column);
+
+            this.cant = cant;
+            this.warehouse = warehouse;
         }
 
-        public void SetInventory()
-        {
-            Inventory = true;
-        }
-
-        public void addRow(String upc, String productName)
+        public void addRow(String upc, String productName, int cant)
         {
             DataRow row;
             row = this.NewRow();
             row["ID"] = upc;
             row["NOMBRE"] = productName;
+            row["TOTAL"] = cant.ToString();
             this.Rows.Add(row);
         }
 
@@ -95,9 +106,18 @@ namespace AxesoFeng
             tbcName.MappingName = item.ColumnName;
             tbcName.HeaderText = item.ColumnName;
             tableStyle.GridColumnStyles.Add(tbcName);
-            if (Inventory)
+            if (cant)
             {
                 item = this.Columns[2];
+                tbcName = new DataGridTextBoxColumn();
+                tbcName.Width = 200;
+                tbcName.MappingName = item.ColumnName;
+                tbcName.HeaderText = item.ColumnName;
+                tableStyle.GridColumnStyles.Add(tbcName);
+            }
+            if (warehouse)
+            {
+                item = this.Columns[3];
                 tbcName = new DataGridTextBoxColumn();
                 tbcName.Width = 200;
                 tbcName.MappingName = item.ColumnName;

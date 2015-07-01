@@ -81,7 +81,7 @@ namespace AxesoFeng
                         {
                             if (firstMessage)
                             {
-                                Inequalities.Add("**No deberian estar aqui:");
+                                Inequalities.Add("**Excedentes:");
                                 firstMessage = false;
                             }
                             Inequalities.Add(" " + prodRead.name);
@@ -110,7 +110,7 @@ namespace AxesoFeng
                         if (firstMessage)
                         {
                             Inequalities.Add("");
-                            Inequalities.Add("**Deberian estar aqui:");
+                            Inequalities.Add("**Faltantes:");
                             firstMessage = false;
                         }
                         Inequalities.Add(" " + prodInv.name);

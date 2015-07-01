@@ -148,7 +148,15 @@ namespace AxesoFeng
                     CompareTo((WarehouseBox.SelectedItem as ComboboxItem).Value.ToString());
             }
             else
-                CompareTo(menu.configData.id_warehouse.ToString());
+            {
+                if (MessageBox.Show("¿Desea guardar la lectura?", "OK", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+                {
+                    MessageComparison msg = new MessageComparison(menu);
+                    msg.Save(menu.configData.id_warehouse.ToString());
+                    this.Hide();
+                }
+            }
             if (CompSuccesfull) {
                 this.Hide();
             }                

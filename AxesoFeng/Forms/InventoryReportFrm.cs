@@ -79,7 +79,11 @@ namespace AxesoFeng
 
         private void reportBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProductTable table = new ProductTable();   
+            ProductTable table = new ProductTable(false,false);
+            if (menu.configInvent.version == 2)
+                table = new ProductTable(false, true);
+            else if (menu.configInvent.version == 3)
+                table = new ProductTable(true, false); 
             //String path=@"\rfiddata\iupc"+DateTime.Parse(reportBox.Items[reportBox.SelectedIndex].ToString()).ToFileTime().ToString()+".csv";
             if (reportBox.SelectedIndex < 0)
                 return;
@@ -90,8 +94,11 @@ namespace AxesoFeng
                 CsvRow rowcsv = new CsvRow();
                 while (reader.ReadRow(rowcsv))
                 {
-                    ///Oficilia
-                    table.addRow(rowcsv[0], rowcsv[1]);
+                    if (menu.configInvent.version == 2)
+                        table.addRow(rowcsv[0], rowcsv[1], 
+                            getNameWarehouse(int.Parse(rowcsv[2]), menu.warehouses.collection));
+                    else if (menu.configInvent.version == 3)
+                        table.addRow(rowcsv[0], rowcsv[1], int.Parse(rowcsv[2]));                    
                 }
             }
             DataView view = new DataView(table);            
