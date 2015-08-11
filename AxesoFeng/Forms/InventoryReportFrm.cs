@@ -39,24 +39,10 @@ namespace AxesoFeng
                 comp = path1.Split(new Char[] { '_' });
                 try
                 {
-                    //Date only whit tens 
-                    //public enum index
-                    //{
-                    //    client_id = 1,
-                    //    warehouse_id = 2,
-                    //    date_time = 3,
-                    //}
-                    if (menu.configInvent.version == 2)
-                    {
-                        reportBox.Items.Add(getNameWarehouse(int.Parse(comp[(int)Sync.SyncOrdenEsM.index.warehouse_id]),
-                            menu.warehouses.collection) + " " +
-                        Sync.FormatDateTime(comp[(int)Sync.SyncOrdenEsM.index.date_time]).Substring(2, 
-                            comp[(int)Sync.SyncOrdenEsM.index.date_time].Length - 2));
-                    }
-                    else {
-                        reportBox.Items.Add(Sync.FormatDateTime(comp[(int)Sync.SyncOrdenEsM.index.date_time]).Substring(2, 
-                            comp[(int)Sync.SyncOrdenEsM.index.date_time].Length - 2));
-                    }
+                    reportBox.Items.Add(getNameWarehouse(int.Parse(comp[(int)Sync.SyncOrdenEsM.index.warehouse_id]),
+                        menu.warehouses.collection) + " " +
+                    Sync.FormatDateTime(comp[(int)Sync.SyncOrdenEsM.index.date_time]).Substring(2, 
+                        comp[(int)Sync.SyncOrdenEsM.index.date_time].Length - 2));
                 }
                 catch (Exception exc) {
                     MessageBox.Show("Nombre del archivo sin formato correcto", "Error",

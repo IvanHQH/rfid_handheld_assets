@@ -33,6 +33,7 @@
             this.labelLog = new System.Windows.Forms.Label();
             this.pbSave = new System.Windows.Forms.PictureBox();
             this.pbBack = new System.Windows.Forms.PictureBox();
+            this.pbDelete = new System.Windows.Forms.PictureBox();
             this.SuspendLayout();
             // 
             // messagesListview
@@ -43,7 +44,6 @@
             this.messagesListview.Size = new System.Drawing.Size(224, 189);
             this.messagesListview.TabIndex = 6;
             this.messagesListview.View = System.Windows.Forms.View.List;
-            this.messagesListview.SelectedIndexChanged += new System.EventHandler(this.messagesListview_SelectedIndexChanged);
             this.messagesListview.GotFocus += new System.EventHandler(this.messagesListview_GotFocus);
             // 
             // labelLog
@@ -64,10 +64,18 @@
             // pbBack
             // 
             this.pbBack.Image = ((System.Drawing.Image)(resources.GetObject("pbBack.Image")));
-            this.pbBack.Location = new System.Drawing.Point(153, 195);
+            this.pbBack.Location = new System.Drawing.Point(116, 195);
             this.pbBack.Name = "pbBack";
             this.pbBack.Size = new System.Drawing.Size(35, 25);
             this.pbBack.Click += new System.EventHandler(this.ExitButton_Click);
+            // 
+            // pbDelete
+            // 
+            this.pbDelete.Image = ((System.Drawing.Image)(resources.GetObject("pbDelete.Image")));
+            this.pbDelete.Location = new System.Drawing.Point(155, 195);
+            this.pbDelete.Name = "pbDelete";
+            this.pbDelete.Size = new System.Drawing.Size(35, 25);
+            this.pbDelete.Click += new System.EventHandler(this.pbDelete_Click);
             // 
             // MessageComparison
             // 
@@ -75,6 +83,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(240, 294);
+            this.Controls.Add(this.pbDelete);
             this.Controls.Add(this.pbSave);
             this.Controls.Add(this.pbBack);
             this.Controls.Add(this.labelLog);
@@ -92,5 +101,6 @@
         private System.Windows.Forms.Label labelLog;
         private System.Windows.Forms.PictureBox pbSave;
         private System.Windows.Forms.PictureBox pbBack;
+        private System.Windows.Forms.PictureBox pbDelete;
     }
 }

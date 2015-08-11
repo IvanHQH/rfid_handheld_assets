@@ -110,7 +110,7 @@ namespace AxesoFeng
             {
                 item = this.Columns[2];
                 tbcName = new DataGridTextBoxColumn();
-                tbcName.Width = 200;
+                tbcName.Width = 50;
                 tbcName.MappingName = item.ColumnName;
                 tbcName.HeaderText = item.ColumnName;
                 tableStyle.GridColumnStyles.Add(tbcName);

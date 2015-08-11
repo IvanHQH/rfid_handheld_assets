@@ -16,27 +16,30 @@ namespace AxesoFeng.Forms
         private MenuForm menu;
         private String valueWarehouse;
         public bool saveDiff;
+        private List<string> assetsNamesDelete;
+        private int indexInitExced;
 
         public MessageComparison(MenuForm form)
         {            
             InitializeComponent();
             menu = form;
             setColors(menu.configData);
+            assetsNamesDelete = new List<string>();
         }
 
         public void fillMessages(List<String> messages,String valueWarehouse)
         {
             this.valueWarehouse = valueWarehouse;
             messagesListview.Items.Clear();
+            int i = 0;
             foreach (String message in messages)
+            {
+                if (message.Equals("**Faltantes:"))
+                    indexInitExced = i;
                 messagesListview.Items.Add(new ListViewItem(message));
-        }
-
-        public void fillMessages(List<String> messages)
-        {
-            messagesListview.Items.Clear();
-            foreach (String message in messages)
-                messagesListview.Items.Add(new ListViewItem(message));
+                i++;
+            }
+            assetsNamesDelete = new List<string>();
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
@@ -49,17 +52,6 @@ namespace AxesoFeng.Forms
 
         }
 
-        private void messagesListview_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            foreach (ListViewItem item in messagesListview.Items)
-            {
-                if (item.Selected)
-                {
-                    MessageBox.Show(item.Text);
-                    break;
-                }
-            }
-        }
 
         private void SaveButton_Click(object sender, EventArgs e)
         { 
@@ -75,9 +67,15 @@ namespace AxesoFeng.Forms
             String path;
             DateTime timestamp = DateTime.Now;
             path = NameFile(TypeFile.epc, valueWarehouse,timestamp,false);
-            menu.products.saveEPCs(menu.rrfid, folder, path);
+            if(menu.configInvent.version == 2)
+                menu.products.saveEPCs(menu.rrfid, folder, path,assetsNamesDelete);
+            else if (menu.configInvent.version == 3)
+                menu.products.saveEPCs(menu.rrfid, folder, path);
             path = NameFile(TypeFile.upc, valueWarehouse,timestamp,false);
-            menu.products.saveUPCs(menu.rrfid, folder, path);
+            if (menu.configInvent.version == 2)
+                menu.products.saveUPCs(menu.rrfid, folder, path, assetsNamesDelete);
+            else if (menu.configInvent.version == 3)
+                menu.products.saveUPCs(menu.rrfid, folder, path);
             path = NameFile(TypeFile.upc, valueWarehouse, timestamp, true);
             SaveMessage(folder, path);
             menu.rrfid.clear();
@@ -118,6 +116,28 @@ namespace AxesoFeng.Forms
                     path = menu.pathFolderName + "iupcs_" + dataName + ".csv";
             }
             return path;
+        }
+
+        private void pbDelete_Click(object sender, EventArgs e)
+        {
+            if(messagesListview.SelectedIndices.Count>0)
+            {
+                int index = messagesListview.SelectedIndices[0];
+                string asset =  messagesListview.Items[index].Text;
+                string[] words; 
+                if (index < indexInitExced - 1 && asset.Length > 0)
+                {
+                    if (MessageBox.Show("¿Está seguro de eliminar " + asset +
+                        " de la lectura?", "Confirmación", MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+                        messagesListview.Items.RemoveAt(index);
+                    words = asset.Split(' ');
+                    assetsNamesDelete.Add(words[words.Length - 1]);
+                }
+                else
+                    MessageBox.Show("No se permite eliminar los faltantes","Aviso",
+                        MessageBoxButtons.OK,MessageBoxIcon.Exclamation,MessageBoxDefaultButton.Button1);
+            }
         }
 
         private void MessageComparison_GotFocus(object sender, EventArgs e)

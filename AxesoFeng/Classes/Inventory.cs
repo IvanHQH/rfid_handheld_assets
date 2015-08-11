@@ -84,7 +84,7 @@ namespace AxesoFeng
                                 Inequalities.Add("**Excedentes:");
                                 firstMessage = false;
                             }
-                            Inequalities.Add(" " + prodRead.name);
+                            Inequalities.Add(" " + prodRead.name + " " + prodRead.upc);
                             break;
                         }
                     }
@@ -113,7 +113,7 @@ namespace AxesoFeng
                             Inequalities.Add("**Faltantes:");
                             firstMessage = false;
                         }
-                        Inequalities.Add(" " + prodInv.name);
+                        Inequalities.Add(" " + prodInv.name + " " + prodInv.upc);
                     }
                 }
             }

@@ -52,6 +52,7 @@
             this.reportGrid.Name = "reportGrid";
             this.reportGrid.Size = new System.Drawing.Size(224, 169);
             this.reportGrid.TabIndex = 8;
+            this.reportGrid.CurrentCellChanged += new System.EventHandler(this.reportGrid_CurrentCellChanged);
             this.reportGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.reportGrid_MouseDown);
             // 
             // WarehouseBox

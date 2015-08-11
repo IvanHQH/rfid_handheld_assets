@@ -230,10 +230,7 @@ namespace AxesoFeng
 
             foreach (Asset prod in productlist.getAll())
             {
-                ///UpcObject = new UpcInventory(prod.upc, prod.place_name);
-                ///Oficialia
                 UpcObject = new UpcInventory(prod.upc, prod.name,prod.place_id);
-                ///
                 UpcIndex.Add(prod.upc, UpcList.Count);
                 UpcList.Add(UpcObject);
             }

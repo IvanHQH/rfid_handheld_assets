@@ -5,6 +5,7 @@ using System.Collections;
 using System.Text;
 using ReadWriteCsv;
 using System.IO;
+using MobileEPC;
 
 namespace AxesoFeng
 {
@@ -65,6 +66,30 @@ namespace AxesoFeng
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="folder"></param>
+        /// <param name="path"></param>
+        /// <param name="asstesDeletes">Names Assets</param>
+        public void saveEPCs(SimpleRFID reader, String folder, String path, List<string> asstesDeletes)
+        {
+            Directory.CreateDirectory(folder);
+            using (CsvFileWriter writer = new CsvFileWriter(path))
+            {
+                foreach (DictionaryEntry item in reader.m_TagTable)
+                {
+                    if (findElemnt(asstesDeletes, EpcTools.getUpc(item.Key.ToString())) == false)
+                    {
+                        CsvRow row = new CsvRow();
+                        row.Add(item.Key.ToString());
+                        writer.WriteRow(row);
+                    }
+                }
+            }
+        }
+
         public void saveUPCs(SimpleRFID reader, string folder, string path)
         {
             Directory.CreateDirectory(folder);
@@ -81,5 +106,43 @@ namespace AxesoFeng
                 }
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="folder"></param>
+        /// <param name="path"></param>
+        /// <param name="asstesDeletes">Names Assets</param>
+        public void saveUPCs(SimpleRFID reader, string folder, string path, List<string> asstesDeletes)
+        {
+            Directory.CreateDirectory(folder);
+
+            using (CsvFileWriter writer = new CsvFileWriter(path))
+            {
+                foreach (UpcInventory item in reader.fillUPCsInventory(this))
+                {
+                    if (findElemnt(asstesDeletes, item.upc) == false)
+                    {
+                        CsvRow row = new CsvRow();
+                        row.Add(item.upc);
+                        row.Add(item.name);
+                        row.Add(item.place_id.ToString());
+                        writer.WriteRow(row);
+                    }
+                }
+            }
+        }
+
+        private bool findElemnt(List<string> elements,string element)
+        {
+            foreach(string e in elements)
+            {
+                if(e.Equals(element))
+                    return true;
+            }
+            return false;
+        }
+
     }
 }

@@ -40,3 +40,5 @@ C:\Users\Arellano\Desktop\rfid_Inventory\AxesoFeng\obj\Debug\AxesoFeng.UPCSearch
 C:\Users\Arellano\Desktop\rfid_Inventory\AxesoFeng\obj\Debug\RfidInventory.csproj.GenerateResource.Cache
 C:\Users\Arellano\Desktop\rfid_Inventory\AxesoFeng\obj\Debug\RfidInventory.exe
 C:\Users\Arellano\Desktop\rfid_Inventory\AxesoFeng\obj\Debug\RfidInventory.pdb
+C:\Users\Arellano\Desktop\rfid_Inventory\AxesoFeng\bin\Debug\ReadWriteCsv.dll
+C:\Users\Arellano\Desktop\rfid_Inventory\AxesoFeng\bin\Debug\ReadWriteCsv.pdb

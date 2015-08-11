@@ -32,8 +32,6 @@ namespace AxesoFeng
             InitializeComponent();
             menu = form;
             setColors(menu.configData);
-            if (menu.configInvent.version == 3)
-                WarehouseBox.Visible = false;
             WarehouseBox.Items.Clear();
             ComboboxItem item;
             foreach (Warehouse entry in menu.warehouses.collection)
@@ -138,28 +136,20 @@ namespace AxesoFeng
         private void Comparar_Click(object sender, EventArgs e)
         {
             pushComparison = true;
-            if (menu.configInvent.version != 3)
+            if (WarehouseBox.SelectedItem == null)
             {
-                if (WarehouseBox.SelectedItem == null)
-                {
-                    MessageBox.Show("Seleccione un almacén", "Orden de Salida");
-                    return;
-                }else
-                    CompareTo((WarehouseBox.SelectedItem as ComboboxItem).Value.ToString());
-            }
-            else
-            {
-                if (MessageBox.Show("¿Desea guardar la lectura?", "OK", MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
-                {
-                    MessageComparison msg = new MessageComparison(menu);
-                    msg.Save(menu.configData.id_warehouse.ToString());
-                    this.Hide();
-                }
-            }
+                MessageBox.Show("Seleccione un almacén", "Orden de Salida");
+                return;
+            }else
+                CompareTo((WarehouseBox.SelectedItem as ComboboxItem).Value.ToString());
             if (CompSuccesfull) {
                 this.Hide();
             }                
+        }
+
+        private void reportGrid_CurrentCellChanged(object sender, EventArgs e)
+        {
+            
         }
 
     }
